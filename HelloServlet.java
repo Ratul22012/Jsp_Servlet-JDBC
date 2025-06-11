@@ -1,5 +1,7 @@
 package com.example.first_servlet;
+
 import java.io.*;
+import java.sql.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -33,6 +35,38 @@ public class HelloServlet extends HttpServlet {
         out.println("<p>Religion: " + religion + "</p>");
         out.println("<p>Nationality: " + nationality + "</p>");
         out.println("<p>Educational Qualification: " + education + "</p>");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/user_info", "Ratul", ""
+            );
+
+            String sql = "INSERT INTO personal_info (name, father_name, mother_name, address, age, marital_status, blood_group, religion, nationality, education) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, name);
+            pst.setString(2, fatherName);
+            pst.setString(3, motherName);
+            pst.setString(4, address);
+            pst.setInt(5, Integer.parseInt(age));
+            pst.setString(6, maritalStatus);
+            pst.setString(7, bloodGroup);
+            pst.setString(8, religion);
+            pst.setString(9, nationality);
+            pst.setString(10, education);
+
+            int rowsInserted = pst.executeUpdate();
+            if (rowsInserted > 0) {
+                out.println("<p><strong>Data inserted successfully into database.</strong></p>");
+            }
+
+            con.close();
+        } catch (Exception e) {
+            out.println("<p style='color:red;'>Error: " + e.getMessage() + "</p>");
+        }
+
         out.println("</body></html>");
     }
 
