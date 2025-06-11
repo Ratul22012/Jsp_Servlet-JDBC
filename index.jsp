@@ -2,23 +2,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Form Submission</title>
 </head>
 <body>
 <h2>Fill out the form</h2>
 <form action="hello-servlet" method="post">
-    Name: <input type="text" name="name"><br><br>
-    Father's Name: <input type="text" name="fatherName"><br><br>
-    Mother's Name: <input type="text" name="motherName"><br><br>
-    Address: <input type="text" name="address"><br><br>
-    Age: <input type="number" name="age"><br><br>
+    Name: <input type="text" name="name" required><br><br>
+    Father's Name: <input type="text" name="fatherName" required><br><br>
+    Mother's Name: <input type="text" name="motherName" required><br><br>
+    Address: <input type="text" name="address" required><br><br>
+    Age: <input type="number" name="age" min="1" required><br><br>
+
     Marital Status:
-    <select name="maritalStatus">
+    <select name="maritalStatus" required>
+        <option value="">--Select--</option>
         <option>Single</option>
         <option>Married</option>
     </select><br><br>
+
     Blood Group:
-    <select name="bloodGroup">
+    <select name="bloodGroup" required>
+        <option value="">--Select--</option>
         <option>A+</option>
         <option>A-</option>
         <option>B+</option>
@@ -28,9 +33,10 @@
         <option>AB+</option>
         <option>AB-</option>
     </select><br><br>
-    Religion: <input type="text" name="religion"><br><br>
-    Nationality: <input type="text" name="nationality"><br><br>
-    Educational Qualification: <input type="text" name="education"><br><br>
+
+    Religion: <input type="text" name="religion" required><br><br>
+    Nationality: <input type="text" name="nationality" required><br><br>
+    Educational Qualification: <input type="text" name="education" required><br><br>
 
     <input type="submit" value="Submit">
 </form>
